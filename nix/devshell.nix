@@ -18,6 +18,7 @@
         packages = [
           # keep-sorted start
           pkgs.nixd
+          pkgs.sops
           treefmt
           # keep-sorted end
         ];

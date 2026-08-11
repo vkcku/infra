@@ -1,0 +1,9 @@
+---
+keys:
+  - &users '':
+      - &vkcku "age1jtl0m9t7rtfmh674zres8pecmcugv7yxamv8hkvlf3tk2g8p25nsnccslh"
+creation_rules:
+  - path_regex: modules/core/secrets.yaml
+    key_groups:
+      - age:
+          - *vkcku

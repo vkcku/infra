@@ -12,6 +12,11 @@
 
     import-tree.url = "github:denful/import-tree";
 
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     treefmt-nix-config = {
       url = "github:vkcku/treefmt-nix-config";
       inputs.nixpkgs.follows = "nixpkgs";
