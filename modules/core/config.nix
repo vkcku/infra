@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.core = { lib, ... }: {
-    options.infra = {
+    options.infra.core = {
       profile = lib.mkOption {
         type = lib.types.enum [
           "server"

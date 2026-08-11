@@ -2,7 +2,7 @@
   flake.modules.nixos.core =
     { config, lib, ... }:
     let
-      cfg = config.infra;
+      cfg = config.infra.core;
     in
     {
       sops.secrets."tailscale_auth_key" = { };
