@@ -4,6 +4,8 @@
 
     sops.defaultSopsFile = ./secrets.yaml;
 
+    sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+
     virtualisation.vmVariant = {
       # Use the age key from the host (my development machine) to decrypt
       # in the VMs.
