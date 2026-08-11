@@ -1,0 +1,49 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  # Allow manually re-running a deploy from the Actions tab.
+  workflow_dispatch:
+
+# Only the checkout needs repo access; nothing writes back to GitHub.
+permissions:
+  contents: read
+
+# Never run two deploys at once, and don't bother deploying an
+# intermediate commit if newer ones are already queued.
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31.11.0
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: Connect to Tailscale
+        uses: tailscale/github-action@780049a30b6ff5c378a9e7b389d15ece7a204888 # v4.1.3
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+          ping: indra
+
+      - name: Deploy to indra
+        env:
+          NIX_SSHOPTS: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+        run: |
+          nix run nixpkgs#nixos-rebuild -- switch \
+            --flake .#indra \
+            --target-host deploy@indra \
+            --use-substitutes \
+            --sudo
