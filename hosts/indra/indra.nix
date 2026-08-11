@@ -12,7 +12,10 @@ in
 
     hardware.facter.reportPath = ./facter.json;
 
-    infra.core.disk = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0";
+    infra.core = {
+      profile = "server";
+      disk = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0";
+    };
 
     disko.devices.disk.main.content.partitions = {
       # Hostinger VPS boots in legacy BIOS mode.
