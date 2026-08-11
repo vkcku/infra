@@ -11,8 +11,7 @@
       services.tailscale = {
         enable = true;
 
-        authKeyFile =
-          if isServer then config.sops.secrets."tailscale_auth_key".path else null;
+        authKeyFile = if isServer then config.sops.secrets."tailscale_auth_key".path else null;
         extraUpFlags = lib.lists.optional isServer "--ssh";
         extraDaemonFlags = [ "--no-logs-no-support" ];
       };
