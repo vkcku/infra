@@ -12,9 +12,11 @@
       let
         cfg = config.infra.core;
         passwordKey = "${cfg.username}_${config.networking.hostName}_password";
+        rootPasswordKey = "root_${config.networking.hostName}_password";
       in
       {
         sops.secrets."${passwordKey}".neededForUsers = true;
+        sops.secrets."${rootPasswordKey}".neededForUsers = true;
 
         users.users."${cfg.username}" = {
           isNormalUser = true;
@@ -22,6 +24,12 @@
           extraGroups = [ "wheel" ];
           hashedPasswordFile = config.sops.secrets."${passwordKey}".path;
         };
+
+        users.users.root = {
+          hashedPasswordFile = config.sops.secrets."${rootPasswordKey}".path;
+        };
+
+        users.mutableUsers = false;
 
         nix.settings.trusted-users = [ cfg.username ];
       };
