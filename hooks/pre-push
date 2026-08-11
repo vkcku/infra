@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ -v "IN_NIX_SHELL" && "${name:-}" == "infra-env" ]]; then
+  nix-fast-build --no-link --skip-cached --fail-fast
+else
+  nix develop --command nix-fast-build --no-link --skip-cached --fail-fast
+fi

@@ -13,11 +13,17 @@
 
         packages = [
           # keep-sorted start
+          pkgs.nix-fast-build
           pkgs.nixd
           pkgs.sops
           treefmt
           # keep-sorted end
         ];
+
+        shellHook = ''
+          rootdir="$(git rev-parse --show-toplevel)"
+          git config core.hooksPath "$rootdir/hooks"
+        '';
       };
     };
 }
