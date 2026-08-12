@@ -6,7 +6,9 @@ in
   flake.modules.nixos.indra = { ... }: {
     imports = map (m: flakeConfig.flake.modules.nixos."${m}") [
       # keep-sorted start
+      "caddy"
       "core"
+      "vkcku.com"
       # keep-sorted end
     ];
 
