@@ -17,6 +17,8 @@ in
     infra.core = {
       profile = "server";
       disk = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0";
+      # TODO: Autocalculate this from hardware.facter.report.
+      facts.memory = 8 * 1000 * 1000 * 1000; # 8 GB
     };
 
     disko.devices.disk.main.content.partitions = {
