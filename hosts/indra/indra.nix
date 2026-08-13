@@ -8,6 +8,7 @@ in
       # keep-sorted start
       "caddy"
       "core"
+      "postgres"
       "vkcku.com"
       # keep-sorted end
     ];
