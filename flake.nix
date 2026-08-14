@@ -12,6 +12,16 @@
 
     import-tree.url = "github:denful/import-tree";
 
+    pastyears = {
+      # `git+ssh` allows using my SSH credentials instead of having to setup
+      # a Github PAT.
+      url = "git+ssh://git@github.com/vkcku/pastyears";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        treefmt-nix-config.follows = "treefmt-nix-config";
+      };
+    };
+
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
