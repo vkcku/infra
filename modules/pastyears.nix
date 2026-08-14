@@ -231,7 +231,7 @@
             Group = user;
 
             ExecStartPre = "${pastyears}/bin/migrations -connstring 'file:${config.sops.templates.pastyears_migrations_url.path}' -migrations-dir '${pastyears}/share/migrations' -schema-file '' up";
-            ExecStart = "${pastyears}/bin/pastyears --connstring-key 'file:${config.sops.templates.pastyears_app_url.path}' --dist-dir '${pastyears}/share/frontend/dist' --manifest-path '${pastyears}/share/frontend/manifest.json' --port ${toString config.infra.ports.pastyears}";
+            ExecStart = "${pastyears}/bin/pastyears --connstring-key 'file:${config.sops.templates.pastyears_app_url.path}' --dist-dir '${pastyears}/share/frontend/dist' --manifest-path '${pastyears}/share/frontend/manifest.json' --port ${toString config.infra.ports.pastyears} --host 0.0.0.0";
             Restart = "on-failure";
             RestartSec = 5;
 
