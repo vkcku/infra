@@ -158,11 +158,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786682734,
-        "narHash": "sha256-HHD4UkPoakh/9c4Wb0i+ImLcdDWkFrf/C1N5mNyPeTc=",
+        "lastModified": 1786869027,
+        "narHash": "sha256-45pzchx1JYFNWA5PKGgFuumobgMp+CFqT441xL2cRNw=",
         "ref": "refs/heads/main",
-        "rev": "2ab085895f9962723799661b2ed8c435791772d4",
-        "revCount": 250,
+        "rev": "e1735f907dc35e7c0eaddf21382f66b4d0099150",
+        "revCount": 268,
         "type": "git",
         "url": "ssh://git@github.com/vkcku/pastyears"
       },
