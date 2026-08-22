@@ -6,6 +6,7 @@ in
   flake.modules.nixos.ares = { ... }: {
     imports = map (m: flakeConfig.flake.modules.nixos."${m}") [
       # keep-sorted start
+      "cli-tools"
       "core"
       "dotfiles"
       "git"
