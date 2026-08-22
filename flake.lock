@@ -100,6 +100,26 @@
         "type": "github"
       }
     },
+    "hjem": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787194407,
+        "narHash": "sha256-hMgbN6InoW+S5G/cqGrVwHUmOJcGIT/yUg1Xe6y7t8Q=",
+        "owner": "feel-co",
+        "repo": "hjem",
+        "rev": "7cd7f1c567beaf5527781e0b51647a98acde54e6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "feel-co",
+        "repo": "hjem",
+        "type": "github"
+      }
+    },
     "import-tree": {
       "locked": {
         "lastModified": 1784254960,
@@ -175,6 +195,7 @@
       "inputs": {
         "disko": "disko",
         "flake-parts": "flake-parts",
+        "hjem": "hjem",
         "import-tree": "import-tree",
         "nixpkgs": "nixpkgs",
         "pastyears": "pastyears",

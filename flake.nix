@@ -10,6 +10,14 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 
+    hjem = {
+      url = "github:feel-co/hjem";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        nix-darwin.follows = "";
+      };
+    };
+
     import-tree.url = "github:denful/import-tree";
 
     pastyears = {
