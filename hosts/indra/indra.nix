@@ -10,6 +10,7 @@ in
       "core"
       "deploy-user"
       "pastyears"
+      "ports"
       "postgres"
       "vkcku.com"
       # keep-sorted end
