@@ -3,6 +3,15 @@
     infra.dotfiles = {
       "nushell/config.nu" = ./config.nu;
 
+      "nushell/autoload/carapace.nu" =
+        pkgs.runCommandLocal "carapace.nu"
+          {
+            nativeBuildInputs = [ pkgs.carapace ];
+          }
+          ''
+            carapace _carapace nushell > "$out"
+          '';
+
       "nushell/autoload/zoxide.nu" =
         pkgs.runCommandLocal "zoxide.nu"
           {
@@ -19,6 +28,7 @@
       shell = pkgs.nushell;
       packages = [
         # keep-sorted start
+        pkgs.carapace
         pkgs.zoxide
         # keep-sorted end
       ];
