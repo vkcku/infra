@@ -7,6 +7,7 @@ in
     imports = map (m: flakeConfig.flake.modules.nixos."${m}") [
       # keep-sorted start
       "core"
+      "dotfiles"
       # keep-sorted end
     ];
 
