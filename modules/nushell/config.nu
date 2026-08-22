@@ -17,3 +17,7 @@ $env.config.table.show_empty = false;
 $env.config.datetime_format.normal = "%Y/%m/%d %I:%M:%S"
 
 $env.config.float_precision = 4
+
+load-env {
+  _ZO_EXCLUDE_DIRS: "/nix/store/*"
+}
