@@ -8,6 +8,7 @@ in
       # keep-sorted start
       "caddy"
       "core"
+      "deploy-user"
       "pastyears"
       "postgres"
       "vkcku.com"

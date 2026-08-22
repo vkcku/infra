@@ -1,17 +1,12 @@
 {
-  flake.modules.nixos.core =
-    {
-      config,
-      lib,
-      pkgs,
-      ...
-    }:
+  flake.modules.nixos.deploy-user =
+    { pkgs, ... }:
     let
       user = "deploy";
     in
     {
 
-      config = lib.mkIf (config.infra.core.profile == "server") {
+      config = {
 
         users.groups."${user}" = { };
 
