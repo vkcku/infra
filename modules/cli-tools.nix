@@ -10,6 +10,7 @@
       pkgs.file
       pkgs.gh
       pkgs.htop
+      pkgs.proton-pass-cli
       pkgs.ripgrep
       pkgs.wl-clipboard
       # keep-sorted end
