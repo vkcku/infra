@@ -1,8 +1,7 @@
 {
   flake.modules.nixos.nushell = { config, pkgs, ... }: {
     infra.dotfiles = {
-      "nushell/config.nu" = ./config.nu;
-
+      # keep-sorted start block=yes newline_separated=yes
       "nushell/autoload/carapace.nu" =
         pkgs.runCommandLocal "carapace.nu"
           {
@@ -11,6 +10,8 @@
           ''
             carapace _carapace nushell > "$out"
           '';
+
+      "nushell/autoload/prompt.nu" = ./prompt.nu;
 
       "nushell/autoload/zoxide.nu" =
         pkgs.runCommandLocal "zoxide.nu"
@@ -22,6 +23,9 @@
             echo "alias cd = __zoxide_z" >> "$out"
             echo "alias cdi = __zoxide_zi" >> "$out"
           '';
+
+      "nushell/config.nu" = ./config.nu;
+      # keep-sorted end
     };
 
     users.users."${config.infra.core.username}" = {
