@@ -8,6 +8,7 @@ in
       # keep-sorted start
       "core"
       "dotfiles"
+      "git"
       "nushell"
       # keep-sorted end
     ];
