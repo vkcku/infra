@@ -2,7 +2,7 @@
   flake.modules.nixos.ports =
     { lib, config, ... }:
     let
-      requests = config.infra.portRequests;
+      requests = config.infra.ports.requests;
       explicitPorts = lib.attrsets.filterAttrs (_: v: builtins.isInt v) requests;
 
       basePort = 3000;
@@ -55,8 +55,8 @@
       ports = autoPorts // explicitPorts;
     in
     {
-      options.infra = {
-        portRequests = lib.mkOption {
+      options.infra.ports = {
+        requests = lib.mkOption {
           type = lib.types.attrsOf (
             lib.types.oneOf [
               lib.types.port
@@ -71,14 +71,14 @@
           default = { };
         };
 
-        ports = lib.mkOption {
+        assigned = lib.mkOption {
           type = lib.types.attrsOf lib.types.port;
           readOnly = true;
           description = ''
             The ports used per service.
 
             The values for this should not be set since this is
-            auto-generated. Use `portRequests` instead.
+            auto-generated. Use `ports.requests` instead.
 
             This ensures that all the ports used for various services are defined
             in a consistent manner and allows for checking against multiple
@@ -88,7 +88,7 @@
       };
 
       config = {
-        infra.ports = ports;
+        infra.ports.assigned = ports;
 
         assertions = [
           {

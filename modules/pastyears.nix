@@ -93,7 +93,7 @@
       '';
     in
     {
-      infra.portRequests.pastyears = true;
+      infra.ports.requests.pastyears = true;
 
       users.users."${user}" = {
         isSystemUser = true;
@@ -123,7 +123,7 @@
         let
           mkConnectionString =
             role: passwordPlaceholder:
-            "postgresql://${role}:${passwordPlaceholder}@/${database}?host=${config.infra.postgres.socket_directory}&port=${toString config.infra.ports.postgres}";
+            "postgresql://${role}:${passwordPlaceholder}@/${database}?host=${config.infra.postgres.socket_directory}&port=${toString config.infra.ports.assigned.postgres}";
         in
         {
           "pastyears_app_url" = {
@@ -170,7 +170,7 @@
             "migrations_password:${migrationsPasswordPath}"
           ];
 
-          ExecStart = "${config.services.postgresql.package}/bin/psql --host ${config.infra.postgres.socket_directory} --port ${toString config.infra.ports.postgres} --file ${initScript}";
+          ExecStart = "${config.services.postgresql.package}/bin/psql --host ${config.infra.postgres.socket_directory} --port ${toString config.infra.ports.assigned.postgres} --file ${initScript}";
 
           # keep-sorted start block=yes
           AmbientCapabilities = "";
@@ -231,7 +231,7 @@
             Group = user;
 
             ExecStartPre = "${pastyears}/bin/migrations -connstring 'file:${config.sops.templates.pastyears_migrations_url.path}' -migrations-dir '${pastyears}/share/migrations' -schema-file '' up";
-            ExecStart = "${pastyears}/bin/pastyears --connstring-key 'file:${config.sops.templates.pastyears_app_url.path}' --dist-dir '${pastyears}/share/frontend/dist' --manifest-path '${pastyears}/share/frontend/manifest.json' --port ${toString config.infra.ports.pastyears} --host 0.0.0.0";
+            ExecStart = "${pastyears}/bin/pastyears --connstring-key 'file:${config.sops.templates.pastyears_app_url.path}' --dist-dir '${pastyears}/share/frontend/dist' --manifest-path '${pastyears}/share/frontend/manifest.json' --port ${toString config.infra.ports.assigned.pastyears} --host 0.0.0.0";
             Restart = "on-failure";
             RestartSec = 5;
 

@@ -19,7 +19,7 @@
           ];
     in
     {
-      infra.portRequests.caddy_admin = 2019;
+      infra.ports.requests.caddy_admin = 2019;
 
       networking.firewall.allowedTCPPorts = [
         80
@@ -73,7 +73,7 @@
         '';
 
         globalConfig = ''
-          admin localhost:${toString config.infra.ports.caddy_admin}
+          admin localhost:${toString config.infra.ports.assigned.caddy_admin}
 
           acme_dns cloudflare {env.INFRA_CF_DNS_API_KEY}
 

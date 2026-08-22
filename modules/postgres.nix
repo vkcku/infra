@@ -34,7 +34,7 @@
 
       config = {
 
-        infra.portRequests.postgres = 5432;
+        infra.ports.requests.postgres = 5432;
 
         systemd.services.postgresql.serviceConfig.LogsDirectory = "postgresql/${pgMajor}";
 
@@ -44,7 +44,7 @@
           enableJIT = true;
           settings = {
             listen_addresses = lib.mkForce "";
-            port = config.infra.ports.postgres;
+            port = config.infra.ports.assigned.postgres;
             unix_socket_directories = cfg.socket_directory;
             password_encryption = "scram-sha-256";
 
