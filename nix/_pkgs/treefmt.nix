@@ -7,4 +7,6 @@ treefmt-nix-config.lib.mkTreefmt pkgs {
       default.extend-words.facter = "facter";
     }
   );
+
+  programs.kdlfmt.enable = true;
 }

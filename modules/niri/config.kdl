@@ -1,0 +1,259 @@
+input {
+    keyboard {
+        xkb {
+            options "caps:swapescape"
+        }
+        numlock
+    }
+    touchpad {
+
+    }
+    mouse {
+
+    }
+    trackpoint {
+
+    }
+    focus-follows-mouse
+    mod-key "Super"
+    mod-key-nested "Alt"
+}
+output "eDP-1" {
+    scale 1
+    transform "normal"
+    position x=0 y=0
+}
+output "{{external_monitor}}" {
+    scale 1
+    transform "normal"
+    position x=1920 y=0
+}
+layout {
+    gaps 16
+    center-focused-column "never"
+    background-color "transparent"
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+    default-column-width {
+        proportion 0.5
+    }
+    focus-ring {
+        width 4
+        active-color "#7fc8ff"
+        inactive-color "#505050"
+    }
+    border {
+        off
+    }
+    // You can enable drop shadows for windows.
+    shadow {
+        on
+        softness 30
+        spread 5
+        offset x=0 y=5
+        color "#0007"
+    }
+}
+hotkey-overlay {
+    skip-at-startup
+}
+screenshot-path "~/Pictures/Screenshots/screenshot-%Y-%m-%d-%H-%M-%S.png"
+animations {
+    off
+}
+cursor {
+    hide-when-typing
+    hide-after-inactive-ms 1000
+}
+workspace "main" {
+    open-on-output "{{external_monitor}}"
+}
+workspace "misc" {
+    open-on-output "eDP-1"
+}
+workspace "notes" {
+    open-on-output "{{external_monitor}}"
+}
+// terminal
+spawn-at-startup "ghostty"
+// editor
+spawn-at-startup "ghostty"
+spawn-at-startup "zen"
+spawn-at-startup "obsidian"
+window-rule {
+    match app-id="com.mitchellh.ghostty" at-startup=true
+    open-on-workspace "main"
+}
+window-rule {
+    match app-id="com.mitchellh.ghostty"
+    open-maximized-to-edges true
+    background-effect {
+        blur true
+        xray true
+    }
+}
+window-rule {
+    match app-id="zen" at-startup=true
+    open-on-workspace "main"
+}
+window-rule {
+    match app-id="zen"
+    open-fullscreen true
+    open-maximized true
+}
+window-rule {
+    match app-id="obsidian"
+    open-fullscreen true
+    open-maximized true
+    open-on-workspace "notes"
+}
+window-rule {
+    geometry-corner-radius 20
+    clip-to-geometry true
+}
+window-rule {
+    match app-id="dev.noctalia.Noctalia.Settings"
+    open-floating true
+    default-column-width {
+        fixed 1080
+    }
+    default-window-height {
+        fixed 920
+    }
+}
+window-rule {
+    match app-id="Spotify"
+    open-fullscreen true
+    open-maximized true
+}
+binds {
+    //
+    // General
+    //
+    Mod+Shift+Q hotkey-overlay-title="Quit Niri" {
+        quit
+    }
+    Mod+Q hotkey-overlay-title="Quit Window" {
+        close-window
+    }
+    Mod+F hotkey-overlay-title="Go fullscreen" {
+        fullscreen-window
+    }
+    Mod+O repeat=false {
+        toggle-overview
+    }
+    //
+    // Applications
+    //
+    Mod+T hotkey-overlay-title="Open terminal" repeat=false {
+        spawn "ghostty"
+    }
+    Mod+B hotkey-overlay-title="Open browser" repeat=false {
+        spawn "zen"
+    }
+    //
+    // Audio Control
+    //
+    XF86AudioRaiseVolume allow-when-locked=true {
+        spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+" "-l 1.0"
+    }
+    XF86AudioLowerVolume allow-when-locked=true {
+        spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"
+    }
+    XF86AudioMute allow-when-locked=true {
+        spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"
+    }
+    XF86AudioMicMute allow-when-locked=true {
+        spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"
+    }
+    XF86AudioPlay allow-when-locked=true {
+        spawn "playerctl" "play-pause"
+    }
+    XF86AudioPause allow-when-locked=true {
+        spawn "playerctl" "play-pause"
+    }
+    XF86AudioStop allow-when-locked=true {
+        spawn "playerctl" "stop"
+    }
+    XF86AudioPrev allow-when-locked=true {
+        spawn "playerctl" "previous"
+    }
+    XF86AudioNext allow-when-locked=true {
+        spawn "playerctl" "next"
+    }
+    //
+    // Brightness Control
+    //
+    XF86MonBrightnessUp allow-when-locked=true {
+        spawn "brightnessctl" "--class=backlight" "set" "+10%"
+    }
+    XF86MonBrightnessDown allow-when-locked=true {
+        spawn "brightnessctl" "--class=backlight" "set" "10%-"
+    }
+    //
+    // Navigation
+    //
+    Mod+Left {
+        focus-column-left
+    }
+    Mod+Down {
+        focus-workspace-down
+    }
+    Mod+Up {
+        focus-workspace-up
+    }
+    Mod+Right {
+        focus-column-right
+    }
+    Mod+H {
+        focus-column-left
+    }
+    Mod+J {
+        focus-workspace-down
+    }
+    Mod+K {
+        focus-workspace-up
+    }
+    Mod+L {
+        focus-column-right
+    }
+    Mod+Ctrl+Left {
+        move-column-left
+    }
+    Mod+Ctrl+Down {
+        move-workspace-down
+    }
+    Mod+Ctrl+Up {
+        move-workspace-up
+    }
+    Mod+Ctrl+Right {
+        move-column-right
+    }
+    Mod+Ctrl+H {
+        move-column-left
+    }
+    Mod+Ctrl+J {
+        move-workspace-down
+    }
+    Mod+Ctrl+K {
+        move-workspace-up
+    }
+    Mod+Ctrl+L {
+        move-column-right
+    }
+    Mod+Shift+Left {
+        focus-monitor-left
+    }
+    Mod+Shift+Right {
+        focus-monitor-right
+    }
+    Mod+Shift+H {
+        focus-monitor-left
+    }
+    Mod+Shift+L {
+        focus-monitor-right
+    }
+}
