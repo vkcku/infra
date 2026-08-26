@@ -3,6 +3,11 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     # keep-sorted start block=yes newline_separated=yes
+    # noctalia = {
+    #   url = "github:noctalia-dev/noctalia";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
