@@ -52,6 +52,7 @@
     inputs.flake-parts.lib.mkFlake { inherit inputs; } (
       inputs.import-tree [
         # keep-sorted start
+        ./apps
         ./hosts
         ./modules
         ./nix
