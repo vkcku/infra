@@ -46,8 +46,4 @@ jobs:
         env:
           NIX_SSHOPTS: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
         run: |
-          nix run nixpkgs#nixos-rebuild -- switch \
-            --flake .#indra \
-            --target-host deploy@indra \
-            --use-substitutes \
-            --sudo
+          nix run .#deploy-indra
