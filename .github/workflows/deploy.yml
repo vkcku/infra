@@ -14,7 +14,7 @@ permissions:
 # intermediate commit if newer ones are already queued.
 concurrency:
   group: deploy
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   deploy:
