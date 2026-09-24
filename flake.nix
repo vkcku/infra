@@ -3,11 +3,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     # keep-sorted start block=yes newline_separated=yes
-    # noctalia = {
-    #   url = "github:noctalia-dev/noctalia";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,6 +19,11 @@
     };
 
     import-tree.url = "github:denful/import-tree";
+
+    noctalia = {
+      url = "github:noctalia-dev/noctalia";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     pastyears = {
       # `git+ssh` allows using my SSH credentials instead of having to setup

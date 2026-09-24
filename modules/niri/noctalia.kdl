@@ -1,0 +1,35 @@
+spawn-at-startup "noctalia"
+// For background wallpaper.
+layer-rule {
+    match namespace="^noctalia-wallpaper"
+    place-within-backdrop true
+}
+binds {
+    // Open app launcher.
+    Mod+Space {
+        spawn-sh "noctalia msg panel-toggle launcher"
+    }
+    // Open top command center.
+    Mod+S {
+        spawn-sh "noctalia msg panel-toggle control-center"
+    }
+    // Suspend and lock the current session.
+    Mod+Shift+L {
+        spawn "noctalia" "msg" "session" "lock-and-suspend"
+    }
+    // Suspend the current session without locking it.
+    Mod+Shift+S allow-when-locked=true {
+        spawn "noctalia" "msg" "session" "suspend"
+    }
+}
+// Floating noctalia settings window.
+window-rule {
+    match app-id="dev.noctalia.Noctalia"
+    open-floating true
+    default-column-width {
+        fixed 1080
+    }
+    default-window-height {
+        fixed 920
+    }
+}
