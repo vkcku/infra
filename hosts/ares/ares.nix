@@ -8,6 +8,7 @@ in
       # keep-sorted start
       "cli-tools"
       "core"
+      "desktop"
       "dotfiles"
       "git"
       "nushell"
