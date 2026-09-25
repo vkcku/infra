@@ -22,7 +22,10 @@
 
     nixpak = {
       url = "github:nixpak/nixpak";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+      };
     };
 
     noctalia = {
