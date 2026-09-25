@@ -215,6 +215,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1785975029,
+        "narHash": "sha256-X44cn5rzytELc3NNoQsh0aLkjWA/QzPfc6HPQmsG3sU=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "70ce234312134a463ba7728e94da2486a1d237ac",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "noctalia": {
       "inputs": {
         "nixpkgs": [
@@ -238,13 +254,9 @@
     "pastyears": {
       "inputs": {
         "gomod2nix": "gomod2nix",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
+        "nixpkgs": "nixpkgs_2",
         "templ": "templ",
-        "treefmt-nix-config": [
-          "treefmt-nix-config"
-        ]
+        "treefmt-nix-config": "treefmt-nix-config"
       },
       "locked": {
         "lastModified": 1790348706,
@@ -271,7 +283,7 @@
         "noctalia": "noctalia",
         "pastyears": "pastyears",
         "sops-nix": "sops-nix",
-        "treefmt-nix-config": "treefmt-nix-config"
+        "treefmt-nix-config": "treefmt-nix-config_2"
       }
     },
     "sops-nix": {
@@ -342,6 +354,7 @@
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
+          "pastyears",
           "treefmt-nix-config",
           "nixpkgs"
         ]
@@ -363,6 +376,7 @@
     "treefmt-nix-config": {
       "inputs": {
         "nixpkgs": [
+          "pastyears",
           "nixpkgs"
         ],
         "treefmt-nix": "treefmt-nix"
@@ -378,6 +392,48 @@
       "original": {
         "owner": "vkcku",
         "repo": "treefmt-nix-config",
+        "type": "github"
+      }
+    },
+    "treefmt-nix-config_2": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "treefmt-nix": "treefmt-nix_2"
+      },
+      "locked": {
+        "lastModified": 1786282547,
+        "narHash": "sha256-CyG1c4mUxWyb0Xv4R/VBu/j68i34qcdPy6GxlQXK/i0=",
+        "owner": "vkcku",
+        "repo": "treefmt-nix-config",
+        "rev": "9a696deceb963c8c05a4f0e36f60e49db0500b69",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vkcku",
+        "repo": "treefmt-nix-config",
+        "type": "github"
+      }
+    },
+    "treefmt-nix_2": {
+      "inputs": {
+        "nixpkgs": [
+          "treefmt-nix-config",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1785945821,
+        "narHash": "sha256-NLSyTCW4K4ofhNBllt3omPasm6QpralXH1DBZOc91Dw=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "ae7910970dddc408fe6ab1c8e4b277bb21d72dc0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
         "type": "github"
       }
     }

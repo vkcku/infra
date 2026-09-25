@@ -37,10 +37,12 @@
       # `git+ssh` allows using my SSH credentials instead of having to setup
       # a Github PAT.
       url = "git+ssh://git@github.com/vkcku/pastyears";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        treefmt-nix-config.follows = "treefmt-nix-config";
-      };
+
+      # Unfortunately, this cannot follow nixpkgs. The reason for that is
+      # because it relies on FODs for installing pnpm dependencies. The output
+      # hash may differ based on the pnpm version which causes a build that
+      # works in the pastyears repo to fail in this (in CI where there is
+      # no cached /nix/store).
     };
 
     sops-nix = {
