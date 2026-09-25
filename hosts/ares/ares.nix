@@ -3,7 +3,7 @@ let
   flakeConfig = config;
 in
 {
-  flake.modules.nixos.ares = { ... }: {
+  flake.modules.nixos.ares = { lib, ... }: {
     imports = map (m: flakeConfig.flake.modules.nixos."${m}") [
       # keep-sorted start
       "cli-tools"
@@ -62,5 +62,10 @@ in
       };
     };
 
+    nixpkgs.config.allowUnfreePredicate =
+      pkg:
+      builtins.elem (lib.getName pkg) [
+        "obsidian"
+      ];
   };
 }
