@@ -9,6 +9,7 @@
         # keep-sorted start
         pkgs.acpi
         pkgs.bat
+        pkgs.bubblewrap
         pkgs.coreutils
         pkgs.eza
         pkgs.fd
