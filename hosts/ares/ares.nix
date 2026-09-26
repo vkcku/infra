@@ -66,6 +66,7 @@ in
       pkg:
       builtins.elem (lib.getName pkg) [
         "obsidian"
+        "spotify"
       ];
   };
 }
