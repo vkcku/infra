@@ -4,7 +4,13 @@ treefmt-nix-config.lib.mkTreefmt pkgs {
 
   programs.typos.configFile = toString (
     (pkgs.formats.toml { }).generate "typos.toml" {
-      default.extend-words.facter = "facter";
+      default.extend-words = {
+        facter = "facter";
+      };
+      default.extend-identifiers = {
+        FOD = "FOD";
+        FODs = "FODs";
+      };
     }
   );
 
