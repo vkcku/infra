@@ -288,6 +288,10 @@
           assertion = config.services.postgresql.enable;
           message = "postgres must be enabled to run pastyears";
         }
+        {
+          assertion = pkgs.lib.versions.major config.services.postgresql.package.version == "18";
+          message = "pastyears requires PostgreSQL 18, but services.postgresql.package is version ${config.services.postgresql.package.version}";
+        }
       ];
     };
 }
