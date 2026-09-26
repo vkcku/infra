@@ -10,6 +10,17 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 
+    # The last released version of helix is quite outdated so follow HEAD
+    # instead.
+    #
+    # See https://github.com/helix-editor/helix/issues/15319.
+    helix = {
+      url = "github:helix-editor/helix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
     hjem = {
       url = "github:feel-co/hjem";
       inputs = {
