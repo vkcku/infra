@@ -25,7 +25,6 @@
       url = "github:feel-co/hjem";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        nix-darwin.follows = "";
       };
     };
 
