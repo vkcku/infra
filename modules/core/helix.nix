@@ -116,7 +116,7 @@
 
       environment = {
         systemPackages = [ helix ];
-        sessionVariables.EDITOR = lib.getName helix;
+        sessionVariables.EDITOR = "hx";
       };
     };
 }
