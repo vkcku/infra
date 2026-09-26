@@ -1,6 +1,7 @@
 {
   mkNixPak,
   obsidian,
+  ...
 }:
 let
   sandboxed = mkNixPak {

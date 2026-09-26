@@ -29,7 +29,15 @@
             (map (lib.removeSuffix ".nix"))
           ];
           filteredApps = lib.subtractLists config.infra.desktop.excludedApps appNames;
-          apps = map (name: pkgs.callPackage (./_apps + "/${name}.nix") { inherit mkNixPak; }) filteredApps;
+          apps = map (
+            name:
+            pkgs.callPackage (./_apps + "/${name}.nix") {
+              inherit mkNixPak;
+
+              zen-browser-unwrapped =
+                inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser-unwrapped;
+            }
+          ) filteredApps;
         in
         {
           environment.systemPackages = apps;
