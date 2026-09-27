@@ -20,6 +20,8 @@ in
         disk = "/dev/disk/by-id/nvme-WD_Green_SN350_1TB_231350803893";
         profile = "daily-use";
       };
+
+      desktop.externalMonitor = "HDMI-A-1";
     };
 
     disko.devices.disk.main.content.partitions = {
