@@ -2,12 +2,23 @@
 {
   flake.modules.nixos.core =
     { config, ... }:
+    let
+      profile = config.infra.core.profile;
+
+      gcPeriod =
+        if profile == "server" then
+          "7d"
+        else if profile == "daily-use" then
+          "90d"
+        else
+          throw "unreocognized profile ${profile}";
+    in
     {
       nix = {
         gc = {
           automatic = true;
           dates = "weekly";
-          options = "--delete-older-than 5d --log-format internal-json";
+          options = "--delete-older-than ${gcPeriod} --log-format internal-json";
           persistent = true;
         };
 
