@@ -22,6 +22,13 @@ let
           "cfat_"
         ];
       }
+      # https://tailscale.com/docs/reference/key-prefixes
+      {
+        id = "infra-tailscale";
+        description = "Tailscale API key/secret";
+        regex = ''\btskey-(api|auth|client|scim|webhook)-[A-Za-z0-9]+-[A-Za-z0-9]+\b'';
+        keywords = [ "tskey-" ];
+      }
     ];
 
     # Ignores the following:
