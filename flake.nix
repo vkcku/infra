@@ -8,15 +8,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    terranix = {
-      url = "github:terranix/terranix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-parts.follows = "flake-parts";
-        import-tree.follows = "import-tree";
-      };
-    };
-
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     # The last released version of helix is quite outdated so follow HEAD
@@ -69,6 +60,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    terranix = {
+      url = "github:terranix/terranix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+        import-tree.follows = "import-tree";
+      };
+    };
+
     treefmt-nix-config = {
       url = "github:vkcku/treefmt-nix-config";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -88,6 +88,7 @@
         # keep-sorted start
         ./apps
         ./hosts
+        ./iaac/default.nix
         ./modules
         ./nix
         # keep-sorted end

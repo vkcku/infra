@@ -6,7 +6,10 @@
   ...
 }:
 treefmt-nix-config.lib.mkTreefmt pkgs {
-  settings.excludes = [ "modules/core/secrets.yaml" ];
+  settings.excludes = [
+    "modules/core/secrets.yaml"
+    "iaac/.env"
+  ];
 
   programs.typos.configFile = toString (
     (pkgs.formats.toml { }).generate "typos.toml" {
