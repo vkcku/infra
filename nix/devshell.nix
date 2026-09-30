@@ -5,6 +5,8 @@
     let
       treefmt = pkgs.callPackage ./_pkgs/treefmt.nix {
         inherit (inputs) treefmt-nix-config;
+
+        betterleaks = pkgs.callPackage ../_pkgs/betterleaks.nix { };
       };
     in
     {

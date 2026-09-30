@@ -7,8 +7,11 @@
       ...
     }:
     let
+      betterleaks = pkgs.callPackage ../_pkgs/betterleaks.nix { };
+
       treefmt = pkgs.callPackage ./_pkgs/treefmt.nix {
         inherit (inputs) treefmt-nix-config;
+        inherit betterleaks;
       };
 
       nixosChecks =

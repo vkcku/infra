@@ -1,4 +1,10 @@
-{ pkgs, treefmt-nix-config, ... }:
+{
+  pkgs,
+  lib,
+  treefmt-nix-config,
+  betterleaks,
+  ...
+}:
 treefmt-nix-config.lib.mkTreefmt pkgs {
   settings.excludes = [ "modules/core/secrets.yaml" ];
 
@@ -13,6 +19,16 @@ treefmt-nix-config.lib.mkTreefmt pkgs {
       };
     }
   );
+
+  settings.formatter."betterleaks" = {
+    command = lib.getExe betterleaks;
+    options = [
+      "dir"
+      "--verbose"
+    ];
+    includes = [ "*" ];
+    priority = 1;
+  };
 
   programs.kdlfmt.enable = true;
 }
