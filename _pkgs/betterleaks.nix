@@ -10,6 +10,20 @@ let
   configFile = tomlFormat.generate "betterleaks.toml" {
     extend.useDefault = true;
 
+    rules = [
+      # https://developers.cloudflare.com/fundamentals/api/get-started/token-formats/
+      {
+        id = "infra-cloudflare";
+        description = "Cloudflare API token/key";
+        regex = ''\bcf(k|ut|at)_[A-Za-z0-9]{40,64}\b'';
+        keywords = [
+          "cfk_"
+          "cfut_"
+          "cfat_"
+        ];
+      }
+    ];
+
     # Ignores the following:
     #    - secrets encrypted by sops
     #    - the placeholders for psql variable substitution
