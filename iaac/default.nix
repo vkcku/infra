@@ -3,7 +3,10 @@
     packages.opentofu-json = inputs.terranix.lib.terranixConfiguration {
       inherit system;
 
-      modules = [ ./main.nix ];
+      modules = [
+        ./main.nix
+        ./cloudflare.nix
+      ];
     };
   };
 }
