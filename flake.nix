@@ -88,9 +88,9 @@
         # keep-sorted start
         ./apps
         ./hosts
-        ./iaac/default.nix
         ./modules
         ./nix
+        ./opentofu/default.nix
         # keep-sorted end
       ]
     );

@@ -10,7 +10,7 @@ creation_rules:
       - age:
           - *vkcku
           - *indra
-  - path_regex: iaac/\.env$
+  - path_regex: opentofu/\.env$
     key_groups:
       - age:
           - *vkcku
