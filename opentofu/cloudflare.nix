@@ -22,6 +22,11 @@ in
   provider.cloudflare.api_token = "\${var.cloudflare_api_token}";
 
   resource.cloudflare_r2_bucket = {
+    infra = {
+      account_id = accountId;
+      name = "infra";
+    };
+
     pastyears_assets = {
       account_id = accountId;
       name = "pastyears-assets";
