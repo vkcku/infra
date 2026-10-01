@@ -32,4 +32,11 @@ in
       name = "pastyears-assets";
     };
   };
+
+  resource.cloudflare_zone.chekur_com = {
+    name = "chekur.com";
+    paused = false;
+    type = "full";
+    account.id = accountId;
+  };
 }
