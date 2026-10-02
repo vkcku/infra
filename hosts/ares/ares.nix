@@ -17,30 +17,36 @@ in
 
     infra = {
       core = {
-        disk = "/dev/disk/by-id/nvme-WD_Green_SN350_1TB_231350803893";
         profile = "daily-use";
       };
 
       desktop.externalMonitor = "HDMI-A-1";
     };
 
-    disko.devices.disk.main.content.partitions = {
-      esp = {
-        size = "1G";
-        type = "EF00";
-        content = {
-          type = "filesystem";
-          format = "vfat";
-          mountpoint = "/boot";
-          mountOptions = [ "umask=0077" ];
-        };
-      };
-      root = {
-        size = "100%";
-        content = {
-          type = "filesystem";
-          format = "ext4";
-          mountpoint = "/";
+    disko.devices.disk.main = {
+      type = "disk";
+      device = "/dev/disk/by-id/nvme-WD_Green_SN350_1TB_231350803893";
+      content = {
+        type = "gpt";
+        partitions = {
+          esp = {
+            size = "1G";
+            type = "EF00";
+            content = {
+              type = "filesystem";
+              format = "vfat";
+              mountpoint = "/boot";
+              mountOptions = [ "umask=0077" ];
+            };
+          };
+          root = {
+            size = "100%";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/";
+            };
+          };
         };
       };
     };

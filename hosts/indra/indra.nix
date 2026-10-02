@@ -20,24 +20,32 @@ in
 
     infra.core = {
       profile = "server";
-      disk = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0";
-      # TODO: Autocalculate this from hardware.facter.report.
       facts.memory = 8 * 1000 * 1000 * 1000; # 8 GB
     };
 
-    disko.devices.disk.main.content.partitions = {
-      # Hostinger VPS boots in legacy BIOS mode.
-      boot = {
-        size = "1M";
-        type = "EF02";
-        priority = 1;
-      };
-      root = {
-        size = "100%";
+    disko.devices.disk.main = {
+      disko.devices.disk.main = {
+        type = "disk";
+        device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0";
         content = {
-          type = "filesystem";
-          format = "ext4";
-          mountpoint = "/";
+          type = "gpt";
+
+          partitions = {
+            # Hostinger VPS boots in legacy BIOS mode.
+            boot = {
+              size = "1M";
+              type = "EF02";
+              priority = 1;
+            };
+            root = {
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/";
+              };
+            };
+          };
         };
       };
     };
