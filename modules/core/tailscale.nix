@@ -4,14 +4,15 @@
     let
       cfg = config.infra.core;
       isServer = cfg.profile == "server";
+      authKeyName = "external/tailscale/auth_key";
     in
     {
-      sops.secrets."tailscale_auth_key" = { };
+      sops.secrets.${authKeyName} = { };
 
       services.tailscale = {
         enable = true;
 
-        authKeyFile = if isServer then config.sops.secrets."tailscale_auth_key".path else null;
+        authKeyFile = if isServer then config.sops.secrets.${authKeyName}.path else null;
         extraUpFlags = lib.lists.optional isServer "--ssh";
         extraDaemonFlags = [ "--no-logs-no-support" ];
       };

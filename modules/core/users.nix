@@ -11,8 +11,8 @@
     config =
       let
         cfg = config.infra.core;
-        passwordKey = "${cfg.username}_${config.networking.hostName}_password";
-        rootPasswordKey = "root_${config.networking.hostName}_password";
+        passwordKey = "hosts/${config.networking.hostName}/${cfg.username}_password";
+        rootPasswordKey = "hosts/${config.networking.hostName}/root_password";
       in
       {
         sops.secrets."${passwordKey}".neededForUsers = true;

@@ -17,6 +17,8 @@
             (map lib.trim)
             (lib.filter (line: line != ""))
           ];
+
+      cloudflareDnsKey = "external/cloudflare/api_key_dns";
     in
     {
       infra.ports.requests.caddy_admin = 2019;
@@ -27,13 +29,13 @@
       ];
 
       sops = {
-        secrets."cloudflare_dns_api_key" = {
+        secrets.${cloudflareDnsKey} = {
           owner = config.services.caddy.user;
         };
 
         templates."caddy.env" = {
           content = ''
-            INFRA_CF_DNS_API_KEY="${config.sops.placeholder."cloudflare_dns_api_key"}"
+            INFRA_CF_DNS_API_KEY="${config.sops.placeholder.${cloudflareDnsKey}}"
           '';
           owner = config.services.caddy.user;
         };

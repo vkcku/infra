@@ -6,8 +6,11 @@
 
       database = "pastyears";
 
-      appPasswordPath = config.sops.secrets.pastyears_pg_app.path;
-      migrationsPasswordPath = config.sops.secrets.pastyears_pg_migrations.path;
+      appPasswordKey = "services/pastyears/pg_app";
+      migrationsPasswordKey = "services/pastyears/pg_migrations";
+
+      appPasswordPath = config.sops.secrets.${appPasswordKey}.path;
+      migrationsPasswordPath = config.sops.secrets.${migrationsPasswordKey}.path;
 
       initScript = pkgs.writeText "pastyears-init-script.sql" ''
         \set ON_ERROR_STOP on
@@ -103,14 +106,14 @@
       users.groups."${user}" = { };
 
       sops.secrets = {
-        pastyears_pg_app = {
+        ${appPasswordKey} = {
           owner = user;
           restartUnits = [
             config.systemd.services.pastyears-db-init.name
             config.systemd.services.pastyears.name
           ];
         };
-        pastyears_pg_migrations = {
+        ${migrationsPasswordKey} = {
           owner = user;
           restartUnits = [
             config.systemd.services.pastyears-db-init.name
@@ -128,12 +131,14 @@
         {
           "pastyears_app_url" = {
             owner = user;
-            content = mkConnectionString "pastyears_app" config.sops.placeholder.pastyears_pg_app;
+            content = mkConnectionString "pastyears_app" config.sops.placeholder.${appPasswordKey};
             restartUnits = [ config.systemd.services.pastyears.name ];
           };
           "pastyears_migrations_url" = {
             owner = user;
-            content = mkConnectionString "pastyears_migrations" config.sops.placeholder.pastyears_pg_migrations;
+            content =
+              mkConnectionString "pastyears_migrations"
+                config.sops.placeholder.${migrationsPasswordKey};
             restartUnits = [ config.systemd.services.pastyears.name ];
           };
         };
