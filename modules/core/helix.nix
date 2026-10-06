@@ -100,9 +100,15 @@
         };
       };
 
+      # The perl tree sitter fails to build under newer versions of glibc
+      # so just ignore it. I don't write Perl anyway.
+      helixPackage = pkgs.helix.override {
+        includeGrammarIf = grammar: grammar.name != "perl";
+      };
+
       helix = pkgs.symlinkJoin {
         name = "helix-wrapped";
-        paths = [ pkgs.helix ];
+        paths = [ helixPackage ];
         nativeBuildInputs = [ pkgs.makeBinaryWrapper ];
         postBuild = ''
           wrapProgram $out/bin/hx \

@@ -64,7 +64,7 @@
           #
           # TODO: Separate out the hashes for caddy and plugins somehow. See
           # above issue.
-          hash = "sha256-dQvk6ezY6TQ1J7PjhCXnThF/SqVgPwBO8/RXzHCY+js=";
+          hash = "sha256-xRJ5evsAJ2akg47j3Bt6YDXJOgX88B/rKNP50KSVyNY=";
         };
 
         # Keep this for development and set it to null for production.
