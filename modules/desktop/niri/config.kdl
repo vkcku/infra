@@ -246,4 +246,12 @@ binds {
     Mod+Shift+L {
         focus-monitor-right
     }
+    Mod+1 {
+        focus-monitor "eDP-1"
+    }
+    Mod+2 {
+        // TODO: Allow this to work with whatever the name of the connected
+        // external monitor is.
+        focus-monitor "{{external_monitor}}"
+    }
 }
