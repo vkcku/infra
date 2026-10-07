@@ -43,7 +43,7 @@
               "(.keys | .. | select(anchor == \"ares\")) = \"$agekey\"" \
               "$rootdir/.sops.yaml"
               
-            sops updatekeys --yes "$rootdir/modules/base/secrets.yaml"
+            sops updatekeys --yes "$rootdir/modules/core/secrets.yaml"
 
             # The live installer's Nix store lives in a RAM-backed tmpfs, which
             # is too small to build the full system closure. disko-install
