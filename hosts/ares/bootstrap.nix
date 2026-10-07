@@ -26,7 +26,7 @@
             extrafiles="$(mktemp -d)"
             trap 'rm -rf "$extrafiles"' EXIT
 
-            keydir="$extrafiles/persist/etc/ssh"
+            keydir="$extrafiles/etc/ssh"
             mkdir --parents "$keydir"
 
             privatekey="$keydir/ssh_host_ed25519_key"
@@ -45,10 +45,26 @@
               
             sops updatekeys --yes "$rootdir/modules/base/secrets.yaml"
 
-            sudo disko-install \
+            # The live installer's Nix store lives in a RAM-backed tmpfs, which
+            # is too small to build the full system closure. disko-install
+            # builds the closure on the installer store *before* formatting the
+            # disk, so it runs out of space. Instead we partition and mount the
+            # real disk first, then let nixos-install build into the mounted
+            # target store (/mnt/nix/store) rather than the tmpfs.
+            #
+            # See https://github.com/nix-community/disko/issues/942
+
+            sudo disko \
+              --mode destroy,format,mount \
+              --flake "$rootdir#ares"
+
+            sudo mkdir -p /mnt/etc/ssh
+            sudo cp "$privatekey" "$publickey" /mnt/etc/ssh/
+
+            sudo nixos-install \
               --flake "$rootdir#ares" \
-              --disk main "/dev/disk/by-id/nvme-WD_Green_SN350_1TB_231350803893" \
-              --extra-files "$keydir" "/persist/etc/ssh"
+              --root /mnt \
+              --no-root-passwd
           '';
         };
       in
