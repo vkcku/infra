@@ -199,7 +199,7 @@ binds {
         focus-column-right
     }
     Mod+H {
-        focus-column-left
+        focus-column-left-or-last
     }
     Mod+J {
         focus-workspace-down
@@ -208,7 +208,7 @@ binds {
         focus-workspace-up
     }
     Mod+L {
-        focus-column-right
+        focus-column-right-or-first
     }
     Mod+Ctrl+Left {
         move-column-left
