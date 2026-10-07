@@ -114,7 +114,6 @@
         ];
 
         environment.sessionVariables = {
-          NIRI_CONFIG = "${niriConf}";
           NIXOS_OZONE_WL = "1";
         };
 
@@ -126,6 +125,7 @@
 
         infra.dotfiles = {
           "noctalia/config.toml" = noctaliaConf;
+          "niri/config.kdl" = niriConf;
         };
       };
     };
