@@ -39,6 +39,7 @@
               main = {
                 layer = "overlay";
                 auto_hide = true;
+                show_on_workspace_switch = false;
                 reserve_space = false;
                 thickness = 40;
                 font_weight = "bold";
