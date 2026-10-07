@@ -83,6 +83,7 @@
 
             wallpaper = {
               enabled = true;
+              directory = "${config.users.users.${config.infra.core.username}.home}/Pictures/wallpapers";
             };
             # keep-sorted end
           };
