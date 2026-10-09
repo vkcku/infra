@@ -71,11 +71,7 @@
               };
             };
 
-            notification.filter.spotify = {
-              match = "spotify";
-              show_toast = false;
-              save_history = false;
-            };
+            notification.enable_daemon = false;
 
             theme = {
               source = "wallpaper";
