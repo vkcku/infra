@@ -1,7 +1,8 @@
 {
-  flake.modules.nixos.desktop = { ... }: {
+  flake.modules.nixos.desktop = { config, ... }: {
     # Networking
     networking.networkmanager.enable = true;
+    users.users."${config.infra.core.username}".extraGroups = [ "networkmanager" ];
 
     # Bluetooth
     hardware.bluetooth.enable = true;
