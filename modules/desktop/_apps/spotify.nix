@@ -1,56 +1,58 @@
 {
   mkNixPak,
   spotify,
+  makeFontsConf,
+  noto-fonts,
+  noto-fonts-cjk-sans,
+  noto-fonts-color-emoji,
   ...
 }:
 let
+  fonts = makeFontsConf {
+    fontDirectories = [
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-color-emoji
+    ];
+  };
+
   sandboxed = mkNixPak {
     config = { sloth, ... }: {
-      bubblewrap = {
-        bind.rw = [
-          (sloth.concat' sloth.homeDir "/.config/spotify")
-          (sloth.concat' sloth.homeDir "/.cache/spotify")
+      app.package = spotify;
 
-          (sloth.concat [
-            sloth.runtimeDir
-            "/"
-            (sloth.env "WAYLAND_DISPLAY")
-          ])
+      flatpak.appId = "com.spotify.Client";
 
-          # PipeWire for audio.
-          (sloth.concat' sloth.runtimeDir "/pipewire-0")
-        ];
-
-        # For GPU.
-        bind.dev = [ "/dev/dri" ];
-
-        bind.ro = [
-          "/nix/store"
-
-          # For GPU.
-          "/run/opengl-driver"
-          "/run/opengl-driver-32"
-
-          # Fonts.
-          "/etc/fonts"
-
-          # Network name resolution.
-          "/etc/resolv.conf"
-          "/etc/ssl/certs"
-          "/etc/static/ssl/certs"
-        ];
-
-        network = true;
-
-        env = {
-          NIXOS_OZONE_WL = "1";
-          WAYLAND_DISPLAY = sloth.env "WAYLAND_DISPLAY";
-          XDG_RUNTIME_DIR = sloth.runtimeDir;
-        };
+      dbus.policies = {
+        "org.mpris.MediaPlayer2.spotify" = "own";
+        "org.freedesktop.Notifications" = "talk";
       };
 
-      app = {
-        package = spotify;
+      gpu.enable = true;
+
+      bubblewrap = {
+        network = true;
+
+        sockets = {
+          wayland = true;
+          pipewire = true;
+          pulse = true;
+        };
+
+        tmpfs = [ "/tmp" ];
+
+        bind.rw = [
+          (sloth.mkdir (sloth.concat' sloth.homeDir "/.config/spotify"))
+          (sloth.mkdir (sloth.concat' sloth.homeDir "/.cache/spotify"))
+        ];
+
+        env = {
+          # keep-sorted start
+          FONTCONFIG_FILE = "${fonts}";
+          NIXOS_OZONE_WL = "1";
+          TMPDIR = "/tmp";
+          # keep-sorted end
+        };
+
       };
     };
   };
