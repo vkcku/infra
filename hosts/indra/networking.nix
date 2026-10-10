@@ -12,7 +12,7 @@
         nameservers = [
           "1.1.1.1"
         ];
-        defaultGateway = "145.223.22.254";
+        defaultGateway = "89.116.122.254";
         defaultGateway6 = {
           address = "2a02:4780:12::1";
           interface = "eth0";
@@ -23,23 +23,23 @@
           eth0 = {
             ipv4.addresses = [
               {
-                address = "145.223.22.205";
+                address = "89.116.122.108";
                 prefixLength = 24;
               }
             ];
             ipv6.addresses = [
               {
-                address = "2a02:4780:12:f97f::1";
+                address = "2a02:4780:12:2aa6::1";
                 prefixLength = 48;
               }
               {
-                address = "fe80::42e8:d4ff:feae:c8a4";
+                address = "fe80::6ae8:d4ff:fec4:5757";
                 prefixLength = 64;
               }
             ];
             ipv4.routes = [
               {
-                address = "145.223.22.254";
+                address = "89.116.122.254";
                 prefixLength = 32;
               }
             ];
@@ -50,11 +50,11 @@
               }
             ];
           };
+
         };
       };
-
       services.udev.extraRules = ''
-        ATTR{address}=="40:e8:d4:ae:c8:a4", NAME="eth0"
+        ATTR{address}=="68:e8:d4:c4:57:57", NAME="eth0"
       '';
     };
 }

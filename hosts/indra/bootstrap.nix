@@ -42,7 +42,7 @@
             nixos-anywhere \
               --flake "$rootdir#indra" \
               --extra-files "$extrafiles" \
-              --target-host "root@145.223.22.205"
+              --target-host "root@89.116.122.108"
 
             git add "$rootdir/.sops.yaml" "$rootdir/modules/core/secrets.yaml"
             git commit -m "indra: update sops key"
