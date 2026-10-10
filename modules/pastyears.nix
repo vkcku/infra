@@ -41,6 +41,9 @@
 
         CREATE SCHEMA IF NOT EXISTS dba;
 
+        REVOKE ALL ON SCHEMA dba FROM PUBLIC;
+        GRANT USAGE ON SCHEMA dba TO pastyears_migrations;
+
         CREATE OR REPLACE FUNCTION dba.grant_app_on_schema(target_schema text)
           RETURNS void
           LANGUAGE plpgsql
