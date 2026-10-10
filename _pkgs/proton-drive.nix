@@ -3,6 +3,8 @@
   stdenv,
   fetchurl,
   makeWrapper,
+  libsecret,
+  glib,
 }:
 let
   version = "0.8.0";
@@ -41,6 +43,12 @@ let
       makeWrapper \
         "${stdenv.cc.bintools.dynamicLinker}" \
         "$out/bin/proton-drive" \
+        --prefix LD_LIBRARY_PATH : "${
+          lib.makeLibraryPath [
+            libsecret
+            glib
+          ]
+        }" \
         --add-flags "$src"
 
       runHook postInstall
