@@ -9,6 +9,7 @@
         };
       };
       protondrive = pkgs.callPackage ../_pkgs/proton-drive.nix { };
+      protonpass = pkgs.callPackage ../_pkgs/proton-pass-cli.nix { };
     in
     {
       environment.systemPackages = [
@@ -23,10 +24,10 @@
         pkgs.file
         pkgs.gh
         pkgs.htop
-        pkgs.proton-pass-cli
         pkgs.ripgrep
         pkgs.wl-clipboard
         protondrive
+        protonpass
         # keep-sorted end
       ];
 
