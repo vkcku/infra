@@ -3,7 +3,7 @@ keys:
   - &users '':
       - &vkcku "age1jtl0m9t7rtfmh674zres8pecmcugv7yxamv8hkvlf3tk2g8p25nsnccslh"
   - &hosts '':
-      - &indra "age1fgulawultdjt6t0ahadt7v2ymxu84h5ad4p96t63lnd73a800qfq385dys"
+      - &indra "age1vwwc9x7565vgkc23z59hx5gdfkfesnrqmg7jam90tjlfzvwl2dqsqy398u"
       - &ares "age1mftkjh0t9nxvhlvcc0zrnrz63hn0fkcrpkm936dv2v0asz6rkefsj88xcu"
 creation_rules:
   - path_regex: modules/core/secrets.yaml
