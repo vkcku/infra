@@ -1,4 +1,4 @@
-{ inputs, ... }: {
+{ self, inputs, ... }: {
   flake.modules.nixos.pastyears =
     { config, pkgs, ... }:
     let
@@ -290,6 +290,48 @@
             # keep-sorted end
           };
         };
+
+      services.caddy.virtualHosts."pastyears.net" = {
+        serverAliases = [ "www.pastyears.net" ];
+        extraConfig = ''
+          log {
+            level INFO
+            output file ${config.services.caddy.logDir}/vkcku.com.log
+            format append {
+              wrap filter {
+                wrap json
+                fields {
+                  request>client_ip ip_mask {
+                    ipv4 24
+                    ipv6 48
+                  }
+                }
+              }
+
+              "caddy.version" "${config.services.caddy.package.version}"
+              "infra.version" "${self.rev or self.dirtyRev}"
+              "infra.nixpkgs_version" "${inputs.nixpkgs.rev}"
+              "os.name" "${config.system.nixos.codeName}"
+              "os.version" "${config.system.nixos.version}"
+              "host.id" "${config.networking.hostId}"
+              "host.name" "${config.networking.hostName}"
+              "cf.ray" "{http.request.header.CF-Ray}"
+              "cf.country" "{http.request.header.CF-IPCountry}"
+              "service.namespace" "vkcku.com"
+              "service.name" "caddy"
+            }
+          }
+
+          @internal path /internal /internal/*
+          handle @internal {
+            respond 404
+          }
+
+          handle {
+            reverse_proxy localhost:${toString config.infra.ports.assigned.pastyears}
+          }
+        '';
+      };
 
       assertions = [
         {
