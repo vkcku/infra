@@ -280,11 +280,11 @@
         "treefmt-nix-config": "treefmt-nix-config"
       },
       "locked": {
-        "lastModified": 1791641854,
-        "narHash": "sha256-ZfaVsL7N5IOXIlNJ5duTg29DNWhfIzyF5PFCqKni69Y=",
+        "lastModified": 1791642572,
+        "narHash": "sha256-xEvcm95KE86mW4waPuZ8ByIT8JYG583xet8YKZ/LRz0=",
         "ref": "refs/heads/main",
-        "rev": "28f8a3d27e944fc3a88b9ce3769a0904667be428",
-        "revCount": 344,
+        "rev": "7bf4f463b4cbc7ff4fae6497e9db004b37cd7b4d",
+        "revCount": 345,
         "type": "git",
         "url": "ssh://git@github.com/vkcku/pastyears"
       },
